@@ -67,14 +67,14 @@ Panda.Http = Panda.Http || {};
                 }
             };
 
+            // Extend ajax options
+            options = $.extend(options, ajaxOptions);
+
             // Set Loading page
             if (options.loading) {
                 this.loadingCounter++;
                 $('html').addClass('loading');
             }
-
-            // Extend ajax options
-            options = $.extend(options, ajaxOptions);
 
             // Make request
             var request = $.ajax(options)
@@ -83,6 +83,9 @@ Panda.Http = Panda.Http || {};
                     Panda.Http.Async.counter--;
                     if (options.loading) {
                         Panda.Http.Async.loadingCounter--;
+                    }
+                    if (Panda.Http.Async.loadingCounter <= 0) {
+                        $('html').removeClass('loading');
                     }
 
                     // Delete request from queue
