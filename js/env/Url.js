@@ -62,8 +62,11 @@ Panda.Env = Panda.Env || {};
             var parts = fullHost.split('.');
 
             // Set sub and domain
-            var sub = parts[0];
-            parts = parts.splice(1);
+            var sub = 'www';
+            if (parts.length > 2) {
+                sub = parts[0];
+                parts = parts.splice(1);
+            }
 
             var info = {};
             info['protocol'] = window.location.protocol.replace(":", "");
