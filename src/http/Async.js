@@ -1,4 +1,4 @@
-var Panda = Panda || {};
+Panda = Panda || {};
 Panda.Http = Panda.Http || {};
 
 (function ($) {
@@ -43,9 +43,9 @@ Panda.Http = Panda.Http || {};
             var requestId = 'panda_async_request.' + (new Date()).getTime() + '_' + Math.floor(Math.random() * Math.pow(10, 10));
 
             // Add ajax async variables
-            if ($.type(requestData) == 'object') {
+            if ($.type(requestData) === 'object') {
                 requestData.append('__Async[REQUEST_ID]', requestId);
-            } else if (requestData != null) {
+            } else if (requestData !== null) {
                 requestData += '&__Async[REQUEST_ID]=' + requestId;
             }
 
@@ -95,7 +95,7 @@ Panda.Http = Panda.Http || {};
 
             // Add request to queue
             var requests = $(document).data('panda-async-requests');
-            if ($.type(requests) == 'undefined') {
+            if ($.type(requests) === 'undefined') {
                 requests = {};
             }
             requests[requestId] = request;

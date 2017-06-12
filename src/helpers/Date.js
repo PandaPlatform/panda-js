@@ -5,11 +5,11 @@ Date.prototype.format = function (format) {
     var replace = Date.replaceChars;
     for (var i = 0; i < format.length; i++) {
         var curChar = format.charAt(i);
-        if (i - 1 >= 0 && format.charAt(i - 1) == "\\") {
+        if (i - 1 >= 0 && format.charAt(i - 1) === "\\") {
             returnStr += curChar;
         } else if (replace[curChar]) {
             returnStr += replace[curChar].call(this);
-        } else if (curChar != "\\") {
+        } else if (curChar !== "\\") {
             returnStr += curChar;
         }
     }
@@ -40,7 +40,7 @@ Date.replaceChars = {
         return this.getDay() + 1;
     },
     S: function () {
-        return (this.getDate() % 10 == 1 && this.getDate() != 11 ? 'st' : (this.getDate() % 10 == 2 && this.getDate() != 12 ? 'nd' : (this.getDate() % 10 == 3 && this.getDate() != 13 ? 'rd' : 'th')));
+        return (this.getDate() % 10 === 1 && this.getDate() !== 11 ? 'st' : (this.getDate() % 10 === 2 && this.getDate() !== 12 ? 'nd' : (this.getDate() % 10 === 3 && this.getDate() !== 13 ? 'rd' : 'th')));
     },
     w: function () {
         return this.getDay();
@@ -74,7 +74,7 @@ Date.replaceChars = {
     // Year
     L: function () {
         var year = this.getFullYear();
-        return (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0));
+        return (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0));
     },
     o: function () {
         var d = new Date(this.valueOf());
@@ -138,7 +138,7 @@ Date.replaceChars = {
             else if (offset > DST)
                 break;
         }
-        return (this.getTimezoneOffset() == DST) | 0;
+        return (this.getTimezoneOffset() === DST) | 0;
     },
     O: function () {
         return (-this.getTimezoneOffset() < 0 ? '-' : '+') + (Math.abs(this.getTimezoneOffset() / 60) < 10 ? '0' : '') + (Math.abs(this.getTimezoneOffset() / 60)) + '00';

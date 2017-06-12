@@ -1,4 +1,4 @@
-var Panda = Panda || {};
+Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function ($) {
@@ -11,22 +11,25 @@ Panda.Env = Panda.Env || {};
             url = url.split('#')[0];
             url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
                 if (key in vars) {
-                    if (typeof vars[key] == "string")
+                    if (typeof vars[key] === "string") {
                         vars[key] = [vars[key]];
+                    }
                     vars[key] = $.merge(vars[key], [value]);
                 } else
                     vars[key] = value;
             });
 
-            if (typeof(name) != "undefined")
+            if (typeof(name) !== "undefined") {
                 return vars[name];
+            }
 
             return vars;
         },
         removeVar: function (hrf, vrb) {
             // If URL has no variables, return it
-            if (hrf.indexOf("?") == -1)
+            if (hrf.indexOf("?") === -1) {
                 return hrf;
+            }
 
             // Split variables from URI
             var hr_splitted = hrf.split("?");
@@ -82,14 +85,15 @@ Panda.Env = Panda.Env || {};
         },
         resolve: function (sub, url) {
             // Check if the url is already resolved
-            if (url.indexOf("http") == 0)
+            if (url.indexOf("http") === 0) {
                 return url;
+            }
 
             // Check the subdomain
             var urlInfo = this.info();
             var urlProtocol = urlInfo['protocol'];
             var resolved_url = this.getDomain() + "/" + url;
-            resolved_url = (sub == "www" ? "" : sub + ".") + resolved_url;
+            resolved_url = (sub === "www" ? "" : sub + ".") + resolved_url;
             return urlProtocol + "://" + resolved_url;
         },
         resource: function (url) {

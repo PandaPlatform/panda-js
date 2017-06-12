@@ -1,4 +1,4 @@
-var Panda = Panda || {};
+Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function ($) {
@@ -13,8 +13,9 @@ Panda.Env = Panda.Env || {};
             $(window).off('popstate');
             $(window).on('popstate', function (ev) {
                 // If it's a reload event and not a push state, ignore this trigger
-                if (!this.statePushed)
+                if (!this.statePushed) {
                     return;
+                }
 
                 var path_name = window.location.pathname;
                 var found = false;
@@ -22,12 +23,13 @@ Panda.Env = Panda.Env || {};
                 var match_reg_exp = new RegExp(reg_exp);
 
                 // Check if the path name is the same
-                if (path_name == Panda.Env.State.currentState || Panda.Env.State.currentState.match(match_reg_exp))
+                if (path_name === Panda.Env.State.currentState || Panda.Env.State.currentState.match(match_reg_exp)) {
                     return;
+                }
 
                 // Find weblink with the same location href
                 $("a").each(function () {
-                    if ($.type($(this).attr('href')) != "undefined" && $(this).attr('href').match(match_reg_exp)) {
+                    if ($.type($(this).attr('href')) !== "undefined" && $(this).attr('href').match(match_reg_exp)) {
                         found = true;
                         $(this).click();
                         return false;
@@ -35,17 +37,18 @@ Panda.Env = Panda.Env || {};
                 });
 
                 // If weblink not found, reload the page
-                if (!found)
+                if (!found) {
                     location.reload(true);
+                }
             });
         },
         push: function (state, callback) {
-            if (window.location.href != state && (state != "" && state != "#" && $.type(state) != "undefined")) {
+            if (window.location.href !== state && (state !== "" && state !== "#" && $.type(state) !== "undefined")) {
                 window.history.pushState(Date.now(), "Title", state);
                 this.statePushed = true;
 
                 // Trigger callback
-                if (typeof callback == 'function') {
+                if (typeof callback === 'function') {
                     callback.call();
                 }
 

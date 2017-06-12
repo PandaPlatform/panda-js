@@ -1,5 +1,4 @@
-var Panda = Panda || {};
-
+Panda = Panda || {};
 (function ($) {
     $(document).one("ready", function () {
         // Init event handler/dispatcher
@@ -12,14 +11,14 @@ var Panda = Panda || {};
         },
         on: function (listener, event, context, callback) {
             $(listener).on(event, context, function () {
-                if (typeof callback == 'function') {
+                if (typeof callback === 'function') {
                     callback.apply(this, Array.prototype.slice.call(arguments));
                 }
             });
         },
         one: function (listener, event, context, callback) {
             $(listener).one(event, context, function () {
-                if (typeof callback == 'function') {
+                if (typeof callback === 'function') {
                     callback.apply(this, Array.prototype.slice.call(arguments));
                 }
             });

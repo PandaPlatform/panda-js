@@ -1,4 +1,4 @@
-var Panda = Panda || {};
+Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function ($) {
@@ -15,7 +15,7 @@ Panda.Env = Panda.Env || {};
             }
 
             // Check state and convert to JSON if possible
-            if ($.type(value) == "array" || typeof(value) == "object") {
+            if ($.type(value) === "array" || typeof(value) === "object") {
                 try {
                     value = JSON.stringify(value);
                 } catch (err) {
@@ -24,7 +24,7 @@ Panda.Env = Panda.Env || {};
             }
 
             // If not string, try to convert to string
-            if (typeof(value) != "string") {
+            if (typeof(value) !== "string") {
                 try {
                     value = String(value);
                 } catch (err) {
@@ -61,7 +61,7 @@ Panda.Env = Panda.Env || {};
             }
 
             try {
-                value = jQuery.parseJSON(value);
+                value = $.parseJSON(value);
             } catch (err) {
             }
 

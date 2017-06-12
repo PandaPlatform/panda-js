@@ -1,4 +1,4 @@
-var Panda = Panda || {};
+Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function () {
@@ -10,9 +10,10 @@ Panda.Env = Panda.Env || {};
                 b = documentCookies[i].substr(0, documentCookies[i].indexOf("="));
                 c = documentCookies[i].substr(documentCookies[i].indexOf("=") + 1);
                 b = b.replace(/^\s+|\s+$/g, "");
-                var flag = (b == c_name);
-                if (flag)
+                var flag = (b === c_name);
+                if (flag) {
                     return encodeURIComponent(c);
+                }
             }
 
             return null;
@@ -21,7 +22,7 @@ Panda.Env = Panda.Env || {};
             var expireDate = new Date();
             expireDate.setDate(expireDate.getDate() + exdays);
             var domain = Panda.Env.Url.getDomain();
-            var c_value = encodeURIComponent(value) + "; domain=." + domain + "; path=" + path + ";" + ((exdays == null || exdays == 0) ? "" : "expires=" + expireDate.toUTCString());
+            var c_value = encodeURIComponent(value) + "; domain=." + domain + "; path=" + path + ";" + ((exdays === null || exdays === 0) ? "" : "expires=" + expireDate.toUTCString());
             document.cookie = c_name + "=" + c_value;
         }
     };
