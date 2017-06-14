@@ -2,7 +2,7 @@ Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function ($) {
-    Panda.Env.Url = {
+    Panda.Env.Url = $.extend(Panda.Env.Url || {}, {
         getVar: function (name) {
             return Panda.Env.Url.getUrlVar(window.location.href, name);
         },
@@ -100,5 +100,5 @@ Panda.Env = Panda.Env || {};
             // Resolve url to www
             return this.resolve("www", url);
         }
-    };
+    });
 })(jQuery);

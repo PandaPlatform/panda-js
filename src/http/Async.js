@@ -3,7 +3,7 @@ Panda.Http = Panda.Http || {};
 
 (function ($) {
     // Create Asynchronous Communication Protocol Object
-    Panda.Http.Async = {
+    Panda.Http.Async = $.extend(Panda.Http.Async || {}, {
         counter: 0,
         loadingCounter: 0,
         init: function () {
@@ -105,10 +105,8 @@ Panda.Http = Panda.Http || {};
 
             return request;
         }
-    };
+    });
 
     // Initialize
-    $(document).one('ready', function () {
-        Panda.Http.Async.init();
-    });
+    Panda.Http.Async.init();
 })(jQuery);

@@ -1,11 +1,7 @@
 Panda = Panda || {};
-(function ($) {
-    $(document).one("ready", function () {
-        // Init event handler/dispatcher
-        Panda.Events.init();
-    });
 
-    Panda.Events = {
+(function ($) {
+    Panda.Events = $.extend(Panda.Events || {}, {
         init: function () {
             // Register global events
         },
@@ -29,5 +25,8 @@ Panda = Panda || {};
         dispatch: function (listener, event, callback) {
             $(listener).trigger(event, callback);
         }
-    };
+    });
+
+    // Init event handler/dispatcher
+    Panda.Events.init();
 })(jQuery);

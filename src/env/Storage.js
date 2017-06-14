@@ -2,7 +2,7 @@ Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function ($) {
-    Panda.Env.Storage = {
+    Panda.Env.Storage = $.extend(Panda.Env.Storage || {}, {
         set: function (name, value, persistent) {
             // Check if Storage is supported
             if (typeof(Storage) === "undefined") {
@@ -88,5 +88,5 @@ Panda.Env = Panda.Env || {};
 
             return true;
         }
-    };
+    });
 })(jQuery);

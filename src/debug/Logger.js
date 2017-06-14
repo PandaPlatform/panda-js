@@ -2,7 +2,7 @@ Panda = Panda || {};
 Panda.Debug = Panda.Debug || {};
 
 (function () {
-    Panda.Debug.Logger = {
+    Panda.Debug.Logger = $.extend(Panda.Debug.Logger || {}, {
         status: function () {
             return (Panda.Env.Cookies.get("plogger") === "");
         },
@@ -21,5 +21,5 @@ Panda.Debug = Panda.Debug || {};
                 console.dirxml(content);
             }
         }
-    };
-})();
+    });
+})(jQuery);

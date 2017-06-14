@@ -2,7 +2,7 @@ Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function () {
-    Panda.Env.Cookies = {
+    Panda.Env.Cookies = $.extend(Panda.Env.Cookies || {}, {
         get: function (c_name) {
             var i, b, c;
             var documentCookies = document.cookie.split(";");
@@ -25,5 +25,5 @@ Panda.Env = Panda.Env || {};
             var c_value = encodeURIComponent(value) + "; domain=." + domain + "; path=" + path + ";" + ((exdays === null || exdays === 0) ? "" : "expires=" + expireDate.toUTCString());
             document.cookie = c_name + "=" + c_value;
         }
-    };
-})();
+    });
+})(jQuery);

@@ -1,12 +1,12 @@
 var Panda = Panda || {};
-(function ($) {
-    $(document).one("ready", function () {
-        Panda.init();
-    });
 
-    Panda = {
+(function ($) {
+    Panda = $.extend(Panda || {}, {
         init: function () {
             // Register library
         }
-    };
+    });
+
+    // Initialize
+    Panda.init();
 })();

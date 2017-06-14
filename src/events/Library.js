@@ -2,7 +2,7 @@ Panda = Panda || {};
 Panda.Events = Panda.Events || {};
 
 (function ($) {
-    Panda.Events.Library = {
+    Panda.Events.Library = $.extend(Panda.Events.Library || {}, {
         init: function () {
             // Redirect
             Panda.Events.on(document, 'window.redirect', '', function (ev, url) {
@@ -14,10 +14,8 @@ Panda.Events = Panda.Events || {};
                 Panda.Env.Url.reload();
             });
         }
-    };
+    });
 
     // Initialize
-    $(document).one("ready", function () {
-        Panda.Events.Library.init();
-    });
+    Panda.Events.Library.init();
 })(jQuery);
