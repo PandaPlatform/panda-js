@@ -2,6 +2,8 @@ Panda = Panda || {};
 Panda.Debug = Panda.Debug || {};
 
 (function () {
+    'use strict';
+
     Panda.Debug.Logger = $.extend(Panda.Debug.Logger || {}, {
         status: function () {
             return (Panda.Env.Cookies.get("plogger") === "");

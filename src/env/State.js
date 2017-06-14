@@ -2,6 +2,8 @@ Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function ($) {
+    'use strict';
+
     Panda.Env.State = $.extend(Panda.Env.State || {}, {
         statePushed: false,
         currentState: null,
@@ -57,7 +59,4 @@ Panda.Env = Panda.Env || {};
             }
         }
     });
-
-    // Initialize
-    Panda.Env.State.init();
 })(jQuery);

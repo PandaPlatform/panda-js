@@ -2,6 +2,8 @@ Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function () {
+    'use strict';
+
     Panda.Env.Cookies = $.extend(Panda.Env.Cookies || {}, {
         get: function (c_name) {
             var i, b, c;

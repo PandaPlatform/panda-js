@@ -2,6 +2,8 @@ Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function ($) {
+    'use strict';
+
     Panda.Env.Url = $.extend(Panda.Env.Url || {}, {
         getVar: function (name) {
             return Panda.Env.Url.getUrlVar(window.location.href, name);

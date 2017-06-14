@@ -2,6 +2,8 @@ Panda = Panda || {};
 Panda.Env = Panda.Env || {};
 
 (function ($) {
+    'use strict';
+
     Panda.Env.Storage = $.extend(Panda.Env.Storage || {}, {
         set: function (name, value, persistent) {
             // Check if Storage is supported

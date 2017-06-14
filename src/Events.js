@@ -1,6 +1,8 @@
 Panda = Panda || {};
 
 (function ($) {
+    'use strict';
+
     Panda.Events = $.extend(Panda.Events || {}, {
         init: function () {
             // Register global events
