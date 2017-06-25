@@ -11,7 +11,7 @@
     // Initialize Panda Libraries
     var panda = [
         // Panda
-        'src/Panda/Panda.js',
+        'src/Panda.js',
 
         // Debug package
         'src/Panda/Debug.js',
@@ -41,9 +41,9 @@
         'src/Panda/Http/Jar/FormAsync.js',
 
         // Main files
-        'src/Panda/Init.js'
+        'src/Init.js'
     ];
-    var version = 1.2;
+    var version = '1.2.0';
 
     // Set default gulp task
     gulp.task('default', ['build']);
