@@ -1,6 +1,3 @@
-Panda = Panda || {};
-Panda.Http = Panda.Http || {};
-
 (function ($) {
     'use strict';
 
@@ -31,6 +28,9 @@ Panda.Http = Panda.Http || {};
                         $(document).trigger('panda.async.cancel', keysToAbort);
                 }
             });
+
+            // Initialize Jar
+            Panda.Http.Jar.init();
         },
         getScript: function (script, callback) {
             // Get script
