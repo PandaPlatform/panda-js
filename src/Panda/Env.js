@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    Panda.Http = $.extend(Panda.Http || {}, {
+    Panda.Env = $.extend(Panda.Env || {}, {
         init: function () {
-            Panda.Http.Async.init();
+            Panda.Env.State.init();
         }
     });
 })(jQuery);

@@ -133,7 +133,7 @@
             }
 
             // Start HTMLResponse request
-            return Panda.Http.Jar.HTMLResponse.request(jqForm.attr("action"), "POST", formData, jqForm, true, null, options)
+            return Panda.Http.Jar.HTMLAsync.request(jqForm.attr("action"), "POST", formData, jqForm, true, null, options)
                 .always(function () {
                     // Enable inputs again
                     jqForm.find("input[name!=''],select[name!=''],textarea[name!=''],button").prop("disabled", false).removeClass("disabled");

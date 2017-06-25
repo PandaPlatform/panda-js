@@ -1,5 +1,5 @@
 /*!
- * Panda JavaScript Library v1.1.0
+ * Panda JavaScript Library v1.2.0
  * https://pandaphp.org
  *
  * Copyright JS Ioannis Papikas
@@ -12,12 +12,12 @@ var Panda = Panda || {};
     'use strict';
 
     Panda = $.extend(Panda || {}, {
-        version: '1.1.0',
+        version: '1.2.0',
         init: function () {
             // Initialize Panda Libraries
-            Panda.Env.State.init();
-            Panda.Events.Library.init();
-            Panda.Http.Async.init();
+            Panda.Env.init();
+            Panda.Events.init();
+            Panda.Http.init();
         }
     });
 })(jQuery);
