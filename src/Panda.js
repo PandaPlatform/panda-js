@@ -1,5 +1,5 @@
 /*!
- * Panda JavaScript Library v1.2.0
+ * Panda JavaScript Library v1.3.0
  * https://pandaphp.org
  *
  * Copyright JS Ioannis Papikas
