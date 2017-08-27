@@ -16,7 +16,7 @@ var Panda = Panda || {};
      * @type {void|Object|*}
      */
     Panda = $.extend(true, Panda || {}, {
-        version: '1.2.0',
+        version: '1.3.0',
 
         /**
          * Initialize all Packages
