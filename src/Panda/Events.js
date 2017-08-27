@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Base Events Package
+     * Panda Base Events Service
      * @type {void|Object|*}
      */
     Panda.Events = $.extend(Panda.Events || {}, {

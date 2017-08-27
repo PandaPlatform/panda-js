@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Asynchronous Package for Http Requests
+     * Panda Asynchronous Service for Http Requests
      * @type {void|Object|*}
      */
     Panda.Http.Async = $.extend(true, Panda.Http.Async || {}, {

@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Base Http Package
+     * Panda Base Http Service
      * @type {void|Object|*}
      */
     Panda.Http = $.extend(Panda.Http || {}, {

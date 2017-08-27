@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Cookies Package
+     * Panda Cookies Service
      * @type {void|Object|*}
      */
     Panda.Env.Cookies = $.extend(true, Panda.Env.Cookies || {}, {

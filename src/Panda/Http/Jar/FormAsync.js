@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * PAnda Jar Form Async Handler Package
+     * PAnda Jar Form Async Handler Service
      * @type {void|Object|*}
      */
     Panda.Http.Jar.FormAsync = $.extend(true, Panda.Http.Jar.FormAsync || {}, {

@@ -1,27 +1,43 @@
-(function () {
+(function ($) {
     'use strict';
 
     /**
-     * Panda Logger Service
+     * Panda Base Console Service
+     *
      * @type {void|Object|*}
-     * @deprecated Use Panda.Console instead
      */
-    Panda.Debug.Logger = $.extend(true, Panda.Debug.Logger || {}, {
-        logger: false,
+    Panda.Console = $.extend(true, Panda.Console || {}, {
+        console: false,
 
+        /**
+         * Get the status of the console output.
+         * @returns {boolean}
+         */
         status: function () {
-            return (this.logger || Panda.Env.Cookies.get("plogger") || Panda.Debug.Debugger.status());
+            return this.console || Panda.Env.Cookies.get("plogger") || Panda.Debug.Debugger.status();
         },
+
+        /**
+         * @param content
+         */
         log: function (content) {
             if (this.status()) {
                 console.log(content);
             }
         },
+
+        /**
+         * @param content
+         */
         dir: function (content) {
             if (this.status()) {
                 console.dir(content);
             }
         },
+
+        /**
+         * @param content
+         */
         dirxml: function (content) {
             if (this.status()) {
                 console.dirxml(content);

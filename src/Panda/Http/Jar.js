@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Json Async Response Package
+     * Panda Json Async Response Service
      * @type {void|Object|*}
      */
     Panda.Http.Jar = $.extend(true, Panda.Http.Jar || {}, {
@@ -33,13 +33,13 @@
         handleResponse: function (response) {
             // Check if report is not null
             if (!response) {
-                Panda.Debug.Logger.log('The server report is empty. Aborting content parsing.');
+                Panda.Console.log('The server report is empty. Aborting content parsing.');
                 return reject('The server report is empty. Aborting content parsing.');
             }
 
             // Check report integrity
             if (response.headers === undefined) {
-                Panda.Debug.Logger.log('Server Report does not contain a header element. Aborting content parsing.');
+                Panda.Console.log('Server Report does not contain a header element. Aborting content parsing.');
                 return reject('Server Report does not contain a header element. Aborting content parsing.');
             }
             return response.content;

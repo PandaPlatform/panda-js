@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda State Package
+     * Panda State Service
      * @type {void|Object|*}
      */
     Panda.Env.State = $.extend(true, Panda.Env.State || {}, {

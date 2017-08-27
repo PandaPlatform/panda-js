@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Storage Package
+     * Panda Storage Service
      * @type {void|Object|*}
      */
     Panda.Env.Storage = $.extend(true, Panda.Env.Storage || {}, {

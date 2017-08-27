@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Json Async Request Handler Package
+     * Panda Json Async Request Handler Service
      * @type {void|Object|*}
      */
     Panda.Http.Jar.JSONAsync = $.extend(true, Panda.Http.Jar.JSONAsync || {}, {

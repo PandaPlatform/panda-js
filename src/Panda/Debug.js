@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Base Debug Package.
+     * Panda Base Debug Service.
      * @type {void|Object|*}
      */
     Panda.Debug = $.extend(true, Panda.Debug || {}, {});

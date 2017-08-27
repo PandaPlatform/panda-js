@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Url Package
+     * Panda Url Service
      * @type {void|Object|*}
      */
     Panda.Env.Url = $.extend(true, Panda.Env.Url || {}, {

@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Events Library Package
+     * Panda Events Library Service
      * @type {void|Object|*}
      */
     Panda.Events.Library = $.extend(true, Panda.Events.Library || {}, {

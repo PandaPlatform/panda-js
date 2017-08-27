@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * Panda Html Async Request Handler Package
+     * Panda Html Async Request Handler Service
      * @type {void|Object|*}
      */
     Panda.Http.Jar.HTMLAsync = $.extend(true, Panda.Http.Jar.HTMLAsync || {}, {
@@ -45,7 +45,7 @@
 
             // Check if sender is in document, If not, reject report content
             if (startup && !$.contains(document, $(sender).get(0))) {
-                Panda.Debug.Logger.log('The sender of the report does no longer exist in the document.');
+                Panda.Console.log('The sender of the report does no longer exist in the document.');
                 throw new Error('The sender of the report does no longer exist in the document.');
             }
 
