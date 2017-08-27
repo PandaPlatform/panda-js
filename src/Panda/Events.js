@@ -1,6 +1,10 @@
 (function ($) {
     'use strict';
 
+    /**
+     * Panda Base Events Package
+     * @type {void|Object|*}
+     */
     Panda.Events = $.extend(Panda.Events || {}, {
         init: function () {
             // Register global events

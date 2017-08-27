@@ -1,7 +1,11 @@
 (function ($) {
     'use strict';
 
-    Panda.Env.Url = $.extend(Panda.Env.Url || {}, {
+    /**
+     * Panda Url Package
+     * @type {void|Object|*}
+     */
+    Panda.Env.Url = $.extend(true, Panda.Env.Url || {}, {
         getVar: function (name) {
             return Panda.Env.Url.getUrlVar(window.location.href, name);
         },

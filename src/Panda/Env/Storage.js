@@ -1,7 +1,11 @@
 (function ($) {
     'use strict';
 
-    Panda.Env.Storage = $.extend(Panda.Env.Storage || {}, {
+    /**
+     * Panda Storage Package
+     * @type {void|Object|*}
+     */
+    Panda.Env.Storage = $.extend(true, Panda.Env.Storage || {}, {
         set: function (name, value, persistent) {
             // Check if Storage is supported
             if (typeof(Storage) === "undefined") {

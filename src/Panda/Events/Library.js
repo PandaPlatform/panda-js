@@ -1,7 +1,14 @@
 (function ($) {
     'use strict';
 
-    Panda.Events.Library = $.extend(Panda.Events.Library || {}, {
+    /**
+     * Panda Events Library Package
+     * @type {void|Object|*}
+     */
+    Panda.Events.Library = $.extend(true, Panda.Events.Library || {}, {
+        /**
+         * Register generic events and their callbacks
+         */
         init: function () {
             // Redirect
             Panda.Events.on(document, 'window.redirect', '', function (ev, url) {

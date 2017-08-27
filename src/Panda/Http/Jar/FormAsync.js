@@ -1,7 +1,11 @@
 (function ($) {
     'use strict';
 
-    Panda.Http.Jar.FormAsync = $.extend(Panda.Http.Jar.FormAsync || {}, {
+    /**
+     * PAnda Jar Form Async Handler Package
+     * @type {void|Object|*}
+     */
+    Panda.Http.Jar.FormAsync = $.extend(true, Panda.Http.Jar.FormAsync || {}, {
         init: function () {
             // Initialize form submit
             $(document).on('submit', 'form[async]', function (ev) {

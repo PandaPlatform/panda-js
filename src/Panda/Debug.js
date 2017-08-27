@@ -1,5 +1,9 @@
 (function () {
     'use strict';
 
-    Panda.Debug = $.extend(Panda.Debug || {}, {});
+    /**
+     * Panda Base Debug Package.
+     * @type {void|Object|*}
+     */
+    Panda.Debug = $.extend(true, Panda.Debug || {}, {});
 })(jQuery);
