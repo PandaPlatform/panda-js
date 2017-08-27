@@ -11,29 +11,16 @@
      * @type {void|Object|*}
      */
     Panda.Resources = $.extend(true, Panda.Resources || {}, {
-
-        /**
-         * Get a resource url
-         *
-         * @param {string} path
-         * @returns {string}
-         */
-        getResourceUrl: function (path) {
-        },
-
         /**
          * Get a resource file and its contents.
          *
-         * @param {string} path
+         * @param {string} url
          * @param {string} type
          * @returns {Promise}
          */
-        getResourceFile: function (path, type) {
-            // Get resource url
-            var resourceUrl = this.getResourceUrl(path);
-
+        getResourceFile: function (url, type) {
             // Check cache
-            var fromCache = Panda.Cache.get(resourceUrl);
+            var fromCache = Panda.Cache.get(url);
             if (fromCache) {
                 return new Promise(function (resolve) {
                     resolve(fromCache);
@@ -41,11 +28,11 @@
             }
 
             // Get resource from http
-            return Panda.Http.Async.request(resourceUrl, 'GET', [], this, {
+            return Panda.Http.Async.request(url, 'GET', [], this, {
                 dataType: type
             }).then(function (response) {
                 // Add to cache
-                Panda.Cache.set(resourceUrl, response);
+                Panda.Cache.set(url, response);
 
                 // Return response
                 return response;
@@ -59,7 +46,7 @@
          * @returns {*}
          */
         loadJs: function (href) {
-            return this.getResourceFile(href, 'js').then(function (response) {
+            return this.getResourceFile(href, 'html').then(function (response) {
                 $('<script />')
                     .attr('type', 'text/javascript')
                     .html(response)
@@ -74,7 +61,7 @@
          * @returns {*}
          */
         loadCss: function (href) {
-            return this.getResourceFile(href, 'css').then(function (response) {
+            return this.getResourceFile(href, 'html').then(function (response) {
                 $('<style />')
                     .attr('type', 'text/css')
                     .html(response)
