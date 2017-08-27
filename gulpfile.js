@@ -13,37 +13,29 @@
         // Panda
         'src/Panda.js',
 
+        // Base packages
+        'src/Panda/*.js',
+
         // Debug package
-        'src/Panda/Debug.js',
-        'src/Panda/Debug/Debugger.js',
-        'src/Panda/Debug/Logger.js',
+        'src/Panda/Debug/*.js',
 
         // Environment package
-        'src/Panda/Env.js',
-        'src/Panda/Env/Cookies.js',
-        'src/Panda/Env/State.js',
-        'src/Panda/Env/Storage.js',
-        'src/Panda/Env/Url.js',
+        'src/Panda/Env/*.js',
 
         // Events package
-        'src/Panda/Events.js',
-        'src/Panda/Events/Library.js',
+        'src/Panda/Events/*.js',
 
         // Helpers package
-        'src/Panda/Helpers/Date.js',
+        'src/Panda/Helpers/*.js',
 
         // Http package
-        'src/Panda/Http.js',
-        'src/Panda/Http/Async.js',
-        'src/Panda/Http/Jar.js',
-        'src/Panda/Http/Jar/JSONAsync.js',
-        'src/Panda/Http/Jar/HTMLAsync.js',
-        'src/Panda/Http/Jar/FormAsync.js',
+        'src/Panda/Http/*.js',
+        'src/Panda/Http/Jar/*.js',
 
         // Main files
         'src/Init.js'
     ];
-    var version = '1.2.0';
+    var version = '1.2.1';
 
     // Set default gulp task
     gulp.task('default', ['build']);
@@ -64,7 +56,7 @@
         // Clean files
         del('./dist/*');
 
-        // v1.1 (without jQuery)
+        // build without jQuery
         return gulp.src(panda)
             .pipe(concat('panda-' + version + '.js'))
             .pipe(gulp.dest('./dist/'));
@@ -75,7 +67,7 @@
         // Clean files
         del('./dist/*');
 
-        // v1.1 (with jQuery)
+        // build with jQuery
         return gulp.src(['src/jquery/jquery-2.2.4.js'].concat(panda))
             .pipe(concat('panda-' + version + '.jq.js'))
             .pipe(gulp.dest('./dist/'));

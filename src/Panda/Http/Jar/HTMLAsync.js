@@ -1,14 +1,38 @@
 (function ($) {
     'use strict';
 
-    Panda.Http.Jar.HTMLAsync = $.extend(Panda.Http.Jar.HTMLAsync || {}, {
-        request: function (serverUrl, method, requestData, sender, loading, callType, options) {
+    /**
+     * Panda Html Async Request Handler Package
+     * @type {void|Object|*}
+     */
+    Panda.Http.Jar.HTMLAsync = $.extend(true, Panda.Http.Jar.HTMLAsync || {}, {
+        /**
+         * Make an async request and pre-parse the response.
+         *
+         * @param url
+         * @param method
+         * @param data
+         * @param sender
+         * @param loading
+         * @param callType
+         * @param options
+         * @returns {*}
+         */
+        request: function (url, method, data, sender, loading, callType, options) {
             // Use new function
-            return Panda.Http.Jar.JSONAsync.request(serverUrl, method, requestData, sender, loading, options).then(function (response) {
+            return Panda.Http.Jar.JSONAsync.request(url, method, data, sender, loading, options).then(function (response) {
                 return Panda.Http.Jar.HTMLAsync.parseResponseContent(sender, response, callType);
             });
         },
-        // Parse server response events, trigger to document
+
+        /**
+         * Parse server response events, trigger to document.
+         *
+         * @param sender
+         * @param response
+         * @param callType
+         * @returns {*}
+         */
         parseResponseContent: function (sender, response, callType) {
             // Get sender data
             var startup = sender.attr("data-startup") || sender.data("startup");
@@ -53,6 +77,16 @@
 
             return response;
         },
+
+        /**
+         * Parse the given html response.
+         *
+         * @param sender
+         * @param payload
+         * @param attributes
+         * @param startup
+         * @returns {boolean}
+         */
         parseHtmlContent: function (sender, payload, attributes, startup) {
             // If there is no content, trigger modification and exit
             if ($(payload).length === 0) {
@@ -65,12 +99,12 @@
             if (startup === true && dataHolder === null) {
                 dataHolder = sender;
             } else if (attributes !== undefined) {
-                dataHolder = attributes.holder;
+                dataHolder = attributes['holder'];
             }
 
             // If sender has no holder, get holder from payload
             if ($.type(dataHolder) === "undefined" || dataHolder === null || dataHolder === "") {
-                dataHolder = payload.holder;
+                dataHolder = payload['holder'];
             }
 
             // If no holder is given anywhere, get sender
@@ -100,9 +134,15 @@
 
             return true;
         },
-        // Get the response payload's content
+
+        /**
+         * Get the response payload's content.
+         *
+         * @param responsePayload
+         * @returns {string|*}
+         */
         getPayloadContent: function (responsePayload) {
-            return responsePayload.content;
+            return responsePayload['content'];
         }
     });
 })(jQuery);

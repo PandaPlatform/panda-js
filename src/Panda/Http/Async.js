@@ -1,9 +1,17 @@
 (function ($) {
     'use strict';
 
-    Panda.Http.Async = $.extend(Panda.Http.Async || {}, {
+    /**
+     * Panda Asynchronous Package for Http Requests
+     * @type {void|Object|*}
+     */
+    Panda.Http.Async = $.extend(true, Panda.Http.Async || {}, {
         counter: 0,
         loadingCounter: 0,
+
+        /**
+         * Initialize Async listeners and events
+         */
         init: function () {
             // Cancel async requests and trigger cancel event
             Panda.Events.on(document, 'keydown', function (ev) {
@@ -28,9 +36,6 @@
                         $(document).trigger('panda.async.cancel', keysToAbort);
                 }
             });
-
-            // Initialize Jar
-            Panda.Http.Jar.init();
         },
         getScript: function (script, callback) {
             // Get script
@@ -42,13 +47,6 @@
 
             // Create request id
             var requestId = 'panda_async_request.' + (new Date()).getTime() + '_' + Math.floor(Math.random() * Math.pow(10, 10));
-
-            // Add ajax async variables
-            if ($.type(requestData) === 'object') {
-                requestData.append('__Async[REQUEST_ID]', requestId);
-            } else if (requestData !== null) {
-                requestData += '&__Async[REQUEST_ID]=' + requestId;
-            }
 
             // Init object for default ajax options
             var options = {
@@ -69,24 +67,20 @@
             };
 
             // Extend ajax options
-            options = $.extend(options, ajaxOptions);
+            options = $.extend(true, options, ajaxOptions);
 
             // Set Loading page
             if (options.loading) {
                 this.loadingCounter++;
-                $('html').addClass('loading');
             }
 
             // Make request
             var request = $.ajax(options)
                 .always(function (jqXHR, textStatus, errorThrown) {
-                    // Decrease counter
+                    // Decrease counter(s)
                     Panda.Http.Async.counter--;
                     if (options.loading) {
                         Panda.Http.Async.loadingCounter--;
-                    }
-                    if (Panda.Http.Async.loadingCounter <= 0) {
-                        $('html').removeClass('loading');
                     }
 
                     // Delete request from queue

@@ -1,7 +1,11 @@
 (function () {
     'use strict';
 
-    Panda.Env = $.extend(Panda.Env || {}, {
+    /**
+     * Panda Base Environment Package
+     * @type {void|Object|*}
+     */
+    Panda.Env = $.extend(true, Panda.Env || {}, {
         init: function () {
             Panda.Env.State.init();
         }

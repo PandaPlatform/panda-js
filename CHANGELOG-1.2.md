@@ -10,3 +10,7 @@ XXX is the change hash
 * 1.2.0 (2017-06-26)
   * [packages] Add new Jar package
   * [code] Initialize all packages according to code structure and hierarchy
+
+* 1.2.1 (2017-08-27)
+  * [code] Extend all packages using deep extend
+  * [code] All doc-blocks to all Panda Packages

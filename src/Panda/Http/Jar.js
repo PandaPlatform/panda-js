@@ -1,7 +1,11 @@
 (function ($) {
     'use strict';
 
-    Panda.Http.Jar = $.extend(Panda.Http.Jar || {}, {
+    /**
+     * Panda Json Async Response Package
+     * @type {void|Object|*}
+     */
+    Panda.Http.Jar = $.extend(true, Panda.Http.Jar || {}, {
         init: function () {
             Panda.Http.Jar.FormAsync.init();
         },
@@ -13,7 +17,7 @@
             ajaxOptions.withCredentials = true;
 
             // Extend options
-            ajaxOptions = $.extend(ajaxOptions, options);
+            ajaxOptions = $.extend(true, ajaxOptions, options);
 
             // Use new function
             return Panda.Http.Async.request(serverUrl, method, requestData, sender, ajaxOptions).then(function (response) {

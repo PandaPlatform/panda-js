@@ -11,10 +11,17 @@ var Panda = Panda || {};
 (function ($) {
     'use strict';
 
-    Panda = $.extend(Panda || {}, {
+    /**
+     * Panda Main Package
+     * @type {void|Object|*}
+     */
+    Panda = $.extend(true, Panda || {}, {
         version: '1.2.0',
+
+        /**
+         * Initialize all Packages
+         */
         init: function () {
-            // Initialize Panda Libraries
             Panda.Env.init();
             Panda.Events.init();
             Panda.Http.init();

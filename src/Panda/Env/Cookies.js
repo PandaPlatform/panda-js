@@ -1,7 +1,11 @@
 (function () {
     'use strict';
 
-    Panda.Env.Cookies = $.extend(Panda.Env.Cookies || {}, {
+    /**
+     * Panda Cookies Package
+     * @type {void|Object|*}
+     */
+    Panda.Env.Cookies = $.extend(true, Panda.Env.Cookies || {}, {
         get: function (c_name) {
             var i, b, c;
             var documentCookies = document.cookie.split(";");
