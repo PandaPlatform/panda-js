@@ -1,6 +1,3 @@
-Panda = Panda || {};
-Panda.Events = Panda.Events || {};
-
 (function ($) {
     'use strict';
 

@@ -1,12 +1,49 @@
-'use strict';
-
 (function () {
+    'use strict';
+
     // Initialize variables
     var gulp = require('gulp');
     var del = require('del');
     var uglify = require('gulp-uglify');
     var concat = require('gulp-concat');
     var rename = require('gulp-rename');
+
+    // Initialize Panda Libraries
+    var panda = [
+        // Panda
+        'src/Panda.js',
+
+        // Debug package
+        'src/Panda/Debug.js',
+        'src/Panda/Debug/Debugger.js',
+        'src/Panda/Debug/Logger.js',
+
+        // Environment package
+        'src/Panda/Env.js',
+        'src/Panda/Env/Cookies.js',
+        'src/Panda/Env/State.js',
+        'src/Panda/Env/Storage.js',
+        'src/Panda/Env/Url.js',
+
+        // Events package
+        'src/Panda/Events.js',
+        'src/Panda/Events/Library.js',
+
+        // Helpers package
+        'src/Panda/Helpers/Date.js',
+
+        // Http package
+        'src/Panda/Http.js',
+        'src/Panda/Http/Async.js',
+        'src/Panda/Http/Jar.js',
+        'src/Panda/Http/Jar/JSONAsync.js',
+        'src/Panda/Http/Jar/HTMLAsync.js',
+        'src/Panda/Http/Jar/FormAsync.js',
+
+        // Main files
+        'src/Init.js'
+    ];
+    var version = '1.2.0';
 
     // Set default gulp task
     gulp.task('default', ['build']);
@@ -28,34 +65,8 @@
         del('./dist/*');
 
         // v1.1 (without jQuery)
-        return gulp.src([
-            // Panda
-            'src/panda/Panda.js',
-
-            // Debug module
-            'src/panda/debug/Debug.js',
-            'src/panda/debug/Logger.js',
-
-            // Environment module
-            'src/panda/env/Cookies.js',
-            'src/panda/env/State.js',
-            'src/panda/env/Storage.js',
-            'src/panda/env/Url.js',
-
-            // Events module
-            'src/panda/events/Library.js',
-
-            // Helpers module
-            'src/panda/helpers/Date.js',
-
-            // Http module
-            'src/panda/http/Async.js',
-
-            // Main files
-            'src/panda/Events.js',
-            'src/panda/Init.js'
-        ])
-            .pipe(concat('panda-1.1.js'))
+        return gulp.src(panda)
+            .pipe(concat('panda-' + version + '.js'))
             .pipe(gulp.dest('./dist/'));
     });
 
@@ -64,38 +75,9 @@
         // Clean files
         del('./dist/*');
 
-        // v1.1 (without jQuery)
-        return gulp.src([
-            // jQuery
-            'src/jquery/jquery-2.2.4.js',
-
-            // Panda
-            'src/panda/Panda.js',
-
-            // Debug module
-            'src/panda/debug/Debug.js',
-            'src/panda/debug/Logger.js',
-
-            // Environment module
-            'src/panda/env/Cookies.js',
-            'src/panda/env/State.js',
-            'src/panda/env/Storage.js',
-            'src/panda/env/Url.js',
-
-            // Events module
-            'src/panda/events/Library.js',
-
-            // Helpers module
-            'src/panda/helpers/Date.js',
-
-            // Http module
-            'src/panda/http/Async.js',
-
-            // Main files
-            'src/panda/Events.js',
-            'src/panda/Init.js'
-        ])
-            .pipe(concat('panda-1.1.jq.js'))
+        // v1.1 (with jQuery)
+        return gulp.src(['src/jquery/jquery-2.2.4.js'].concat(panda))
+            .pipe(concat('panda-' + version + '.jq.js'))
             .pipe(gulp.dest('./dist/'));
     });
 }());

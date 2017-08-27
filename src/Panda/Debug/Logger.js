@@ -1,6 +1,3 @@
-Panda = Panda || {};
-Panda.Debug = Panda.Debug || {};
-
 (function () {
     'use strict';
 

@@ -1,6 +1,3 @@
-Panda = Panda || {};
-Panda.Env = Panda.Env || {};
-
 (function ($) {
     'use strict';
 
