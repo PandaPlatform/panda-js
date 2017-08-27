@@ -14,23 +14,23 @@
         'src/Panda.js',
 
         // Base packages
-        'src/Panda/*.js',
+        'src/panda/*.js',
 
         // Debug package
-        'src/Panda/Debug/*.js',
+        'src/panda/debug/*.js',
 
         // Environment package
-        'src/Panda/Env/*.js',
+        'src/panda/env/*.js',
 
         // Events package
-        'src/Panda/Events/*.js',
+        'src/panda/events/*.js',
 
         // Helpers package
-        'src/Panda/Helpers/*.js',
+        'src/panda/helpers/*.js',
 
         // Http package
-        'src/Panda/Http/*.js',
-        'src/Panda/Http/Jar/*.js',
+        'src/panda/http/*.js',
+        'src/panda/http/Jar/*.js',
 
         // Main files
         'src/Init.js'
@@ -68,7 +68,7 @@
         del('./dist/*');
 
         // build with jQuery
-        return gulp.src(['src/jquery/jquery-2.2.4.js'].concat(panda))
+        return gulp.src(['src/jquery/*.js'].concat(panda))
             .pipe(concat('panda-' + version + '.jq.js'))
             .pipe(gulp.dest('./dist/'));
     });
