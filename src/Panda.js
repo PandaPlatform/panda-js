@@ -1,5 +1,5 @@
 /*!
- * Panda JavaScript Library v1.3.0
+ * Panda JavaScript Library v1.3.1
  * https://pandaphp.org
  *
  * Copyright JS Ioannis Papikas
@@ -16,7 +16,7 @@ var Panda = Panda || {};
      * @type {void|Object|*}
      */
     Panda = $.extend(true, Panda || {}, {
-        version: '1.3.0',
+        version: '1.3.1',
 
         /**
          * Initialize all Packages

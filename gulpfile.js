@@ -35,7 +35,7 @@
         // Main files
         'src/Init.js'
     ];
-    var version = '1.3.0';
+    var version = '1.3.1';
 
     // Set default gulp task
     gulp.task('default', ['build']);

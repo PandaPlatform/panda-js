@@ -42,10 +42,21 @@
         /**
          * Load an external javascript file.
          *
+         * @param source
+         * @param callback
+         * @returns {*}
+         */
+        loadJs: function (source, callback) {
+            return $.getScript(source, callback);
+        },
+
+        /**
+         * Load an external javascript file.
+         *
          * @param href
          * @returns {*}
          */
-        loadJs: function (href) {
+        loadJsInline: function (href) {
             return this.getResourceFile(href, 'html').then(function (response) {
                 $('<script />')
                     .attr('type', 'text/javascript')
@@ -61,6 +72,20 @@
          * @returns {*}
          */
         loadCss: function (href) {
+            return $('<link/>', {
+                rel: 'stylesheet',
+                type: 'text/css',
+                href: href
+            }).appendTo('head');
+        },
+
+        /**
+         * Load an external css files.
+         *
+         * @param href
+         * @returns {*}
+         */
+        loadCssInline: function (href) {
             return this.getResourceFile(href, 'html').then(function (response) {
                 $('<style />')
                     .attr('type', 'text/css')
