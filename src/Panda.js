@@ -1,12 +1,12 @@
 /*!
- * Panda JavaScript Library v1.2.0
+ * Panda JavaScript Library v1.3.2
  * https://pandaphp.org
  *
  * Copyright JS Ioannis Papikas
  * Released under the MIT license
  * https://pandaphp.org/js/license
  */
-var Panda = Panda || {};
+var Panda = window.Panda || {};
 
 (function ($) {
     'use strict';
@@ -16,7 +16,7 @@ var Panda = Panda || {};
      * @type {void|Object|*}
      */
     Panda = $.extend(true, Panda || {}, {
-        version: '1.2.0',
+        version: '1.3.2',
 
         /**
          * Initialize all Packages
@@ -27,4 +27,7 @@ var Panda = Panda || {};
             Panda.Http.init();
         }
     });
+
+    // Set Panda back to window
+    window.Panda = Panda;
 })(jQuery);
