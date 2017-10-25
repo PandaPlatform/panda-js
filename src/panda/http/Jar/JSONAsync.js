@@ -9,12 +9,12 @@
         /**
          * Make an async request and pre-parse the response.
          *
-         * @param url
-         * @param method
-         * @param data
-         * @param sender
-         * @param loading
-         * @param options
+         * @param {String} url
+         * @param {String} method
+         * @param {Object} data
+         * @param {Object} sender
+         * @param {Boolean} loading
+         * @param {Object} options
          * @returns {*}
          */
         request: function (url, method, data, sender, loading, options) {
@@ -28,8 +28,8 @@
         /**
          * Parse server report actions, trigger to document.
          *
-         * @param sender
-         * @param response
+         * @param {Object} sender
+         * @param {Object} response
          * @returns {*}
          */
         parseResponseEvents: function (sender, response) {
@@ -37,18 +37,17 @@
             for (var key in response) {
                 var responseContent = response[key];
                 var payload = Panda.Http.Jar.JSONAsync.getResponsePayload(responseContent);
-                var reportType = responseContent.type;
+                var responseType = responseContent.type;
 
                 // Filter only actions and trigger to document
-                switch (reportType) {
+                switch (responseType) {
                     case 'action':
                     case 'event':
-                        // Get event and trigger to document
-                        var event = payload;
+                        // Trigger event to payload
                         if ($.type(sender) !== "undefined" && $.contains(document.documentElement, sender.get(0))) {
-                            sender.trigger(event.name, event.value);
+                            sender.trigger(payload.name, payload.value);
                         } else {
-                            $(document).trigger(event.name, event.value);
+                            $(document).trigger(payload.name, payload.value);
                         }
                         break;
                 }
@@ -58,7 +57,8 @@
 
         /**
          * Get the response payload based on the given response
-         * @param response
+         *
+         * @param {Object} response
          * @returns {*}
          */
         getResponsePayload: function (response) {

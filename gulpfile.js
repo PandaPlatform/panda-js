@@ -1,6 +1,9 @@
 (function () {
     'use strict';
 
+    // Set library version
+    var version = '1.4.1';
+
     // Initialize variables
     var gulp = require('gulp');
     var del = require('del');
@@ -35,7 +38,6 @@
         // Main files
         'src/Init.js'
     ];
-    var version = '1.3.2';
 
     // Set default gulp task
     gulp.task('default', ['build']);

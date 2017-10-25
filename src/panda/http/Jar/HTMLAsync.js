@@ -9,31 +9,31 @@
         /**
          * Make an async request and pre-parse the response.
          *
-         * @param url
-         * @param method
-         * @param data
-         * @param sender
-         * @param loading
-         * @param callType
-         * @param options
+         * @param {String} url
+         * @param {String} method
+         * @param {Object} data
+         * @param {Object} sender
+         * @param {Boolean} loading
+         * @param {Object} asyncParameters
+         * @param {Object} options
          * @returns {*}
          */
-        request: function (url, method, data, sender, loading, callType, options) {
+        request: function (url, method, data, sender, loading, asyncParameters, options) {
             // Use new function
             return Panda.Http.Jar.JSONAsync.request(url, method, data, sender, loading, options).then(function (response) {
-                return Panda.Http.Jar.HTMLAsync.parseResponseContent(sender, response, callType);
+                return Panda.Http.Jar.HTMLAsync.parseResponseContent(sender, response, asyncParameters);
             });
         },
 
         /**
          * Parse server response events, trigger to document.
          *
-         * @param sender
-         * @param response
-         * @param callType
+         * @param {Object} sender
+         * @param {Object} response
+         * @param {Object} asyncParameters
          * @returns {*}
          */
-        parseResponseContent: function (sender, response, callType) {
+        parseResponseContent: function (sender, response, asyncParameters) {
             // Get sender data
             var startup = sender.attr("data-startup") || sender.data("startup");
             startup = (startup === "" && $.type(startup) !== "undefined" ? true : startup);
@@ -53,18 +53,17 @@
             var contentModified = false;
             for (var key in response) {
                 var responseContent = response[key];
-                var payload = responseContent.payload;
                 var reportType = responseContent.type;
 
                 // Take action according to result type
                 switch (reportType) {
                     case "data":
                     case "html":
-                        contentModified = Panda.Http.Jar.HTMLAsync.parseHtmlContent(sender, payload, sender.data(callType), startup);
+                        contentModified = Panda.Http.Jar.HTMLAsync.parseHtmlContent(sender, responseContent, asyncParameters, startup);
 
                         break;
                     case "popup":
-                        $(sender).popup($(payload.html));
+                        $(sender).popup($(responseContent.payload));
                         contentModified = true;
                         break;
                 }
@@ -81,20 +80,56 @@
         /**
          * Parse the given html response.
          *
-         * @param sender
-         * @param payload
-         * @param attributes
-         * @param startup
+         * @param {Object} sender
+         * @param {Object} responseContent
+         * @param {Object} attributes
+         * @param {Boolean} startup
          * @returns {boolean}
          */
-        parseHtmlContent: function (sender, payload, attributes, startup) {
+        parseHtmlContent: function (sender, responseContent, attributes, startup) {
             // If there is no content, trigger modification and exit
-            if ($(payload).length === 0) {
+            if ($(responseContent.payload).length === 0) {
                 return false;
             }
 
+            // Get holder
+            var jqHolder = this.getHolder(sender, responseContent, attributes, startup);
+
+            // Get method
+            var method = this.getMethod(responseContent, attributes);
+
+            // Append content to holder
+            switch (method) {
+                case 'replace':
+                    // Remove old contents if replace
+                    jqHolder.contents().remove();
+                    $(responseContent.payload).appendTo(jqHolder);
+                    break;
+                case 'append':
+                    $(responseContent.payload).appendTo(jqHolder);
+                    break;
+                case 'prepend':
+                    $(responseContent.payload).prependTo(jqHolder);
+                    break;
+            }
+
+            return true;
+        },
+
+        /**
+         * Get the html holder for the given set of parameters.
+         *
+         * @param {Object} sender
+         * @param {Object} responseContent
+         * @param {Object} attributes
+         * @param {Boolean} startup
+         *
+         * @returns {Object}
+         */
+        getHolder: function (sender, responseContent, attributes, startup) {
             // Get Report Parameters
             var dataHolder = null;
+
             // If sender is loading at startup, set default holder as sender
             if (startup === true && dataHolder === null) {
                 dataHolder = sender;
@@ -102,9 +137,9 @@
                 dataHolder = attributes['holder'];
             }
 
-            // If sender has no holder, get holder from payload
+            // If sender has no holder, get holder from response content
             if ($.type(dataHolder) === "undefined" || dataHolder === null || dataHolder === "") {
-                dataHolder = payload['holder'];
+                dataHolder = responseContent['holder'];
             }
 
             // If no holder is given anywhere, get sender
@@ -117,32 +152,31 @@
                 jqHolder = $(dataHolder).first();
             }
 
-            // Append content to holder
-            switch (payload.method) {
-                case 'replace':
-                    // Remove old contents if replace
-                    jqHolder.contents().remove();
-                    $(payload.html).appendTo(jqHolder);
-                    break;
-                case 'append':
-                    $(payload.html).appendTo(jqHolder);
-                    break;
-                case 'prepend':
-                    $(payload.html).prependTo(jqHolder);
-                    break;
-            }
-
-            return true;
+            return jqHolder;
         },
 
         /**
-         * Get the response payload's content.
+         * Get the method to apply content to the page.
          *
-         * @param responsePayload
-         * @returns {string|*}
+         * @param {Object} responseContent
+         * @param {Object} attributes
+         * @returns {String}
          */
-        getPayloadContent: function (responsePayload) {
-            return responsePayload['content'];
+        getMethod: function (responseContent, attributes) {
+            // Get Report Parameters
+            var method = null;
+
+            // Get method from attributes
+            if (attributes !== undefined) {
+                method = attributes['method'];
+            }
+
+            // Get method from response
+            if ($.type(method) === "undefined" || method === null || method === "") {
+                method = responseContent['method'];
+            }
+
+            return method;
         }
     });
 })(jQuery);
