@@ -133,7 +133,7 @@
             // If sender is loading at startup, set default holder as sender
             if (startup === true && dataHolder === null) {
                 dataHolder = sender;
-            } else if (attributes !== undefined) {
+            } else if (attributes !== undefined && attributes !== null) {
                 dataHolder = attributes['holder'];
             }
 
@@ -167,7 +167,7 @@
             var method = null;
 
             // Get method from attributes
-            if (attributes !== undefined) {
+            if (attributes !== undefined && attributes !== null) {
                 method = attributes['method'];
             }
 
