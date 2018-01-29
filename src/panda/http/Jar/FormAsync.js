@@ -23,13 +23,13 @@
 
             // Set form prevent unload on edit all data-pu forms
             $(document).on('change', 'input, textarea, select', function () {
-                if ($.type($(this).closest('form').data("pu")) !== "undefined")
-                    $(this).closest('form').data("preventUnload", true);
+                if ($.type($(this).closest('form').data('pu')) !== 'undefined')
+                    $(this).closest('form').data('preventUnload', true);
             });
 
             // Remove data-pu attr from forms
-            $("form[data-pu]").each(function () {
-                $(this).data("pu", $(this).data("pu")).removeAttr("data-pu");
+            $('form[data-pu]').each(function () {
+                $(this).data('pu', $(this).data('pu')).removeAttr('data-pu');
             });
 
             // Form Async Listeners
@@ -46,35 +46,35 @@
                 if (full === 1 || full === undefined) {
                     $(this).trigger('reset');
                 } else {
-                    $(this).find("input[type=password]").val("");
+                    $(this).find('input[type=password]').val("");
                 }
             });
             Panda.Events.off(document, 'form.submitted', 'form');
             Panda.Events.on(document, 'form.submitted', 'form', function (ev, full) {
-                $(this).removeData("preventUnload");
+                $(this).removeData('preventUnload');
             });
         },
         preventUnload: function (holder) {
             // Get forms inside holder (if defined), otherwise get all forms
             var jqForms = null;
-            if ($.type(holder) !== "undefined") {
-                jqForms = $(holder).find("form");
+            if ($.type(holder) !== 'undefined') {
+                jqForms = $(holder).find('form');
             } else {
-                jqForms = $("form");
+                jqForms = $('form');
             }
 
             // Check for forms that prevent unload
             var formsPreventingUnload = jqForms.filter(function () {
-                return $.type($(this).data("preventUnload")) !== "undefined";
+                return $.type($(this).data('preventUnload')) !== 'undefined';
             });
             if (formsPreventingUnload.length > 0) {
-                var pu = "You are editing multiple forms right now. Do you want to leave without finishing?";
+                var pu = 'You are editing multiple forms right now. Do you want to leave without finishing?';
                 if (formsPreventingUnload.length === 1) {
-                    var fpu = formsPreventingUnload.first().data("pu");
-                    if (fpu !== "1" && fpu !== "true") {
+                    var fpu = formsPreventingUnload.first().data('pu');
+                    if (fpu !== '1' && fpu !== 'true') {
                         pu = fpu;
                     } else {
-                        pu = "You are editing a form at the moment. Do you want to leave without finishing?"
+                        pu = 'You are editing a form at the moment. Do you want to leave without finishing?'
                     }
                 }
 
@@ -83,17 +83,17 @@
         },
         submit: function (ev, jqForm) {
             // Check if form is already posting
-            if (jqForm.data("posting") === true) {
+            if (jqForm.data('posting') === true) {
                 return false;
             }
 
             // Initialize posting
-            jqForm.data("posting", true);
+            jqForm.data('posting', true);
 
             // Form Parameters
             var formData = "";
             var urlVarsArray = "";
-            if (jqForm.attr('enctype') === "multipart/form-data") {
+            if (jqForm.attr('enctype') === 'multipart/form-data') {
                 // Initialize form data
                 formData = new FormData();
 
@@ -110,40 +110,46 @@
                 }
 
                 // Get files (if any)
-                jqForm.find("input[type='file']").each(function () {
-                    if ($.type(this.files[0]) !== "undefined") {
-                        formData.append($(this).attr("name"), this.files[0]);
+                jqForm.find('input[type="file"]').each(function () {
+                    if ($.type(this.files[0]) !== 'undefined') {
+                        formData.append($(this).attr('name'), this.files[0]);
                     }
                 });
             } else {
                 // Get url vars
                 urlVarsArray = Panda.Env.Url.getUrlVar(window.location.href);
                 for (var urli in urlVarsArray) {
-                    formData += urli + "=" + urlVarsArray[urli] + "&";
+                    formData += urli + '=' + urlVarsArray[urli] + '&';
                 }
 
                 // Serialize form
                 formData += jqForm.serialize();
             }
 
-            // Disable all inputs
-            jqForm.find("input[name!=''],select[name!=''],textarea[name!=''],button").prop("disabled", true).addClass("disabled");
+            // Disable all form elements that are not disabled already
+            jqForm.find('input[name!=""]:not([disabled]),select[name!=""]:not([disabled]),textarea[name!=""]:not([disabled]),button:not([disabled])')
+                .prop('disabled', true)
+                .addClass('disabled')
+                .addClass('panda-form-disabled');
 
             // Check if form is for upload
             var options = {};
-            if (jqForm.attr('enctype') === "multipart/form-data") {
+            if (jqForm.attr('enctype') === 'multipart/form-data') {
                 options.cache = false;
                 options.contentType = false;
             }
 
             // Start HTMLResponse request
-            return Panda.Http.Jar.HTMLAsync.request(jqForm.attr("action"), "POST", formData, jqForm, true, null, options)
+            return Panda.Http.Jar.HTMLAsync.request(jqForm.attr('action'), 'POST', formData, jqForm, true, null, options)
                 .always(function () {
-                    // Enable inputs again
-                    jqForm.find("input[name!=''],select[name!=''],textarea[name!=''],button").prop("disabled", false).removeClass("disabled");
+                    // Enable form elements, only the ones that were disabled before
+                    jqForm.find('.panda-form-disabled')
+                        .prop('disabled', false)
+                        .removeClass('disabled')
+                        .removeClass('panda-form-disabled');
 
                     // Set posting status false
-                    jqForm.data("posting", false);
+                    jqForm.data('posting', false);
                 });
         },
         reset: function (ev, jqForm) {
