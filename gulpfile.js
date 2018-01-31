@@ -2,7 +2,7 @@
     'use strict';
 
     // Set library version
-    var version = '1.4.4';
+    var version = '1.4.5';
 
     // Initialize variables
     var gulp = require('gulp');

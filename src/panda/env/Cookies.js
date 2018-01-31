@@ -46,7 +46,7 @@
 
             // Set cookie
             var domain = Panda.Env.Url.getDomain();
-            var c_value = encodeURIComponent(value) + "; domain=." + domain + "; path=" + path + ";" + ((exdays === null || exdays === 0) ? "" : "expires=" + expireDate.toUTCString());
+            var c_value = encodeURIComponent(value) + "; domain=." + domain + "; path=" + path + ";" + ((expireDate === null) ? "" : "expires=" + expireDate.toUTCString());
             document.cookie = name + "=" + c_value;
         }
     });
