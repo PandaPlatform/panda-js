@@ -2,39 +2,58 @@
     'use strict';
 
     /**
-     * Panda Base Configuration Service
-     * This Service manages the entire Configuration and provides
-     * proper getters and setters for the main config.
-     *
-     * @type {void|Object|*}
+     * Panda Base Config Service
+     * @type {Object}
      */
-    Panda.Config = $.extend(true, Panda.Config || {}, {
+    Panda.Config = $.extend(true, Panda.Registry || {}, {
         /**
-         * Set the default configuration
-         */
-        config: {},
-
-        /**
-         * @param name
+         * Get a value from the config
+         *
+         * @param {string} name
          * @returns {*}
          */
         get: function (name) {
-            return this.config[name];
+            return this.getConfig()[name];
         },
 
         /**
-         * @param name
-         * @param values
+         * Set a value to the config
+         *
+         * @param {string} name
+         * @param {string|number|object} value
          */
-        set: function (name, values) {
-            this.config[name] = $.extend(true, this.config[name], values || {});
+        set: function (name, value) {
+            // Get config
+            var config = this.getConfig();
+
+            // Set value
+            config[name] = $.extend(true, config[name], value || {});
+
+            // Set config back
+            this.setConfig(config);
         },
 
         /**
-         * @param config
+         * Get the entire config from the registry
+         *
+         * @return {object}
+         */
+        getConfig: function () {
+            return this.registry['config'];
+        },
+
+        /**
+         * @param {object} config
          */
         setConfig: function (config) {
-            this.config = $.extend(true, this.config, config || {});
+            this.registry['config'] = $.extend(true, this.registry['config'], config || {});
+        },
+
+        /**
+         * Clear the config
+         */
+        clear: function () {
+            this.registry['config'] = {};
         }
     });
 })(jQuery);
