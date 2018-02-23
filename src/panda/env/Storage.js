@@ -3,19 +3,25 @@
 
     /**
      * Panda Storage Service
-     * @type {void|Object|*}
+     * @type {Object}
      */
     Panda.Env.Storage = $.extend(true, Panda.Env.Storage || {}, {
+        /**
+         * Set a value to the browser's storage.
+         *
+         * @param {string} name
+         * @param {*} value
+         * @param {boolean} persistent
+         * @return {boolean}
+         */
         set: function (name, value, persistent) {
             // Check if Storage is supported
             if (typeof(Storage) === "undefined") {
                 return false;
             }
 
-            // Don't keep state in session as default
-            if (typeof(persistent) === "undefined") {
-                persistent = false;
-            }
+            // Get Storage Handler
+            var storageHandler = this.getStorage(persistent);
 
             // Check state and convert to JSON if possible
             if ($.type(value) === "array" || typeof(value) === "object") {
@@ -35,33 +41,30 @@
                 }
             }
 
-            // Set local storage
-            if (persistent) {
-                localStorage.setItem(name, value);
-            } else {
-                sessionStorage.setItem(name, value);
-            }
+            // Set item value to Storage
+            storageHandler.setItem(name, value);
 
             return true;
         },
+
+        /**
+         * Get a value from the browser's storage.
+         *
+         * @param {string} name
+         * @param {boolean} persistent
+         * @return {*}
+         */
         get: function (name, persistent) {
             // Check if Storage is supported
             if (typeof(Storage) === "undefined") {
                 return false;
             }
 
-            // Don't get state from session as default
-            if (typeof(persistent) === "undefined") {
-                persistent = false;
-            }
+            // Get Storage Handler
+            var storageHandler = this.getStorage(persistent);
 
-            // Don't get state from session as default
-            var value = null;
-            if (persistent) {
-                value = localStorage.getItem(name);
-            } else {
-                value = sessionStorage.getItem(name);
-            }
+            // Get item value from storage
+            var value = storageHandler.getItem(name);
 
             try {
                 value = $.parseJSON(value);
@@ -71,25 +74,43 @@
             // Return storage value
             return value;
         },
+
+        /**
+         * Remove a variable from the browser's storage.
+         *
+         * @param {string} name
+         * @param {boolean} persistent
+         * @return {boolean}
+         */
         remove: function (name, persistent) {
             // Check if Storage is supported
             if (typeof(Storage) === "undefined") {
                 return false;
             }
 
-            // Don't get state from session as default
+            // Get Storage Handler
+            var storageHandler = this.getStorage(persistent);
+
+            // Remove item from Storage
+            storageHandler.removeItem(name);
+
+            return true;
+        },
+
+        /**
+         * Get the proper Storage handler.
+         *
+         * @param {boolean} persistent
+         * @return {Storage}
+         */
+        getStorage: function (persistent) {
+            // Set sessionStorage as default Storage handler
             if (typeof(persistent) === "undefined") {
                 persistent = false;
             }
 
-            // Don't get state from session as default
-            if (persistent) {
-                localStorage.removeItem(name);
-            } else {
-                sessionStorage.removeItem(name);
-            }
-
-            return true;
+            return persistent ? localStorage : sessionStorage;
         }
+
     });
 })(jQuery);
