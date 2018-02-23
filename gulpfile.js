@@ -2,7 +2,7 @@
     'use strict';
 
     // Set library version
-    var version = '1.4.5';
+    var version = '1.5.0';
 
     // Initialize variables
     var gulp = require('gulp');
@@ -15,6 +15,9 @@
     var panda = [
         // Panda
         'src/Panda.js',
+
+        // Panda Registry
+        'src/panda/Registry.js',
 
         // Base packages
         'src/panda/*.js',
