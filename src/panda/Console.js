@@ -4,7 +4,7 @@
     /**
      * Panda Base Console Service
      *
-     * @type {void|Object|*}
+     * @type {Object}
      */
     Panda.Console = $.extend(true, Panda.Console || {}, {
         console: false,
@@ -14,7 +14,7 @@
          * @returns {boolean}
          */
         status: function () {
-            return this.console || Panda.Env.Cookies.get("plogger") || Panda.Debug.Debugger.status();
+            return this.console || Panda.Debug.Debugger.status();
         },
 
         /**
