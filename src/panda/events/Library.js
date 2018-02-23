@@ -17,7 +17,7 @@
 
             // Reload
             Panda.Events.on(document, 'window.reload', '', function (ev) {
-                Panda.Env.Url.reload();
+                Panda.Env.Url.reload(false);
             });
         }
     });
