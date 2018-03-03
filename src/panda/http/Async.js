@@ -37,10 +37,30 @@
                 }
             });
         },
+
+        /**
+         * Load a script asynchronously
+         *
+         * @param {string} script
+         * @param {function} callback
+         * @return {*}
+         */
         getScript: function (script, callback) {
             // Get script
             return $.getScript(script, callback);
         },
+
+        /**
+         * Make an ajax request.
+         *
+         * @param {string} ajaxUrl
+         * @param {string} method
+         * @param {object} requestData
+         * @param {object} sender
+         * @param {object} ajaxOptions
+         *
+         * @return {PromiseLike}
+         */
         request: function (ajaxUrl, method, requestData, sender, ajaxOptions) {
             // Request counter
             this.counter++;
