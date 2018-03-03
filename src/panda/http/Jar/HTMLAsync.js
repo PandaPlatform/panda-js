@@ -16,7 +16,7 @@
          * @param {Boolean} loading
          * @param {Object} asyncParameters
          * @param {Object} options
-         * @returns {*}
+         * @return {*|PromiseLike<T>|Promise<T>}
          */
         request: function (url, method, data, sender, loading, asyncParameters, options) {
             // Use new function
@@ -31,7 +31,7 @@
          * @param {Object} sender
          * @param {Object} response
          * @param {Object} asyncParameters
-         * @returns {*}
+         * @return {*}
          */
         parseResponseContent: function (sender, response, asyncParameters) {
             // Get sender data
@@ -60,12 +60,6 @@
                     case "data":
                     case "html":
                         contentModified = Panda.Http.Jar.HTMLAsync.parseHtmlContent(sender, responseContent, asyncParameters, startup);
-
-                        break;
-                    case "popup":
-                        $(sender).popup($(responseContent.payload));
-                        contentModified = true;
-                        break;
                 }
             }
 
@@ -84,7 +78,7 @@
          * @param {Object} responseContent
          * @param {Object} attributes
          * @param {Boolean} startup
-         * @returns {boolean}
+         * @return {boolean}
          */
         parseHtmlContent: function (sender, responseContent, attributes, startup) {
             // If there is no content, trigger modification and exit
@@ -124,7 +118,7 @@
          * @param {Object} attributes
          * @param {Boolean} startup
          *
-         * @returns {Object}
+         * @return {Object}
          */
         getHolder: function (sender, responseContent, attributes, startup) {
             // Get Report Parameters
@@ -160,7 +154,7 @@
          *
          * @param {Object} responseContent
          * @param {Object} attributes
-         * @returns {String}
+         * @return {String}
          */
         getMethod: function (responseContent, attributes) {
             // Get Report Parameters
