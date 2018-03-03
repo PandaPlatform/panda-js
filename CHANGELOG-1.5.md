@@ -1,4 +1,4 @@
-CHANGELOG for 1.4.x
+CHANGELOG for 1.5.x
 ===================
 
 This changelog references the relevant changes (bug and security fixes) done
