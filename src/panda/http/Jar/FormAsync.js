@@ -6,6 +6,9 @@
      * @type {void|Object|*}
      */
     Panda.Http.Jar.FormAsync = $.extend(true, Panda.Http.Jar.FormAsync || {}, {
+        /**
+         * Initialize Form Async service.
+         */
         init: function () {
             // Initialize form submit
             $(document).on('submit', 'form[async]', function (ev) {
@@ -35,25 +38,34 @@
             // Form Async Listeners
             this.listen();
         },
+
+        /**
+         * Listen for specific events including the following:
+         * - form.submit        -> submit
+         * - form.reset         -> reset
+         * - form.submitted     -> after submit
+         */
         listen: function () {
             Panda.Events.off(document, 'form.submit', 'form');
-            Panda.Events.on(document, 'form.submit', 'form', function (ev, full) {
+            Panda.Events.on(document, 'form.submit', 'form', function () {
                 $(this).submit();
             });
             Panda.Events.off(document, 'form.reset', 'form');
             Panda.Events.on(document, 'form.reset', 'form', function (ev, full) {
-                // Reset form (full or password-only)
-                if (full === 1 || full === undefined) {
-                    $(this).trigger('reset');
-                } else {
-                    $(this).find('input[type=password]').val("");
-                }
+                Panda.Http.Jar.FormAsync.reset($(this), full);
             });
             Panda.Events.off(document, 'form.submitted', 'form');
             Panda.Events.on(document, 'form.submitted', 'form', function (ev, full) {
                 $(this).removeData('preventUnload');
             });
         },
+
+        /**
+         * Check if there are forms that could prevent navigating away from this page
+         *
+         * @param {string} holder
+         * @return {string}
+         */
         preventUnload: function (holder) {
             // Get forms inside holder (if defined), otherwise get all forms
             var jqForms = null;
@@ -81,7 +93,15 @@
                 return pu;
             }
         },
-        submit: function (ev, jqForm) {
+
+        /**
+         * Submit a given form.
+         * Check if the form has asynchronous submit enabled and use Panda.Http.Jar.HTMLAsync to submit.
+         *
+         * @param {object} jqForm
+         * @return {*}
+         */
+        submit: function (jqForm) {
             // Check if form is already posting
             if (jqForm.data('posting') === true) {
                 return false;
@@ -152,9 +172,20 @@
                     jqForm.data('posting', false);
                 });
         },
-        reset: function (ev, jqForm) {
-            // Reset form
-            jqForm.trigger('reset');
+
+        /**
+         * Reset the given form
+         *
+         * @param {object} jqForm
+         * @param {boolean|int} full
+         */
+        reset: function (jqForm, full) {
+            // Reset form (full or password-only)
+            if (full === 1 || full === undefined) {
+                jqForm.trigger('reset');
+            } else {
+                jqForm.find('input[type=password]').val('');
+            }
         }
     });
 })(jQuery);
