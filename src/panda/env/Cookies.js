@@ -21,7 +21,7 @@
                 b = b.replace(/^\s+|\s+$/g, "");
                 var flag = (b === name);
                 if (flag) {
-                    return encodeURIComponent(c);
+                    return decodeURIComponent(c);
                 }
             }
 
