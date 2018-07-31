@@ -160,7 +160,8 @@
             }
 
             // Start HTMLResponse request
-            return Panda.Http.Jar.HTMLAsync.request(jqForm.attr('action'), 'POST', formData, jqForm, true, null, options)
+            var method = jqForm.attr('method') !== undefined ? jqForm.attr('method') : 'post';
+            return Panda.Http.Jar.HTMLAsync.request(jqForm.attr('action'), method, formData, jqForm, true, null, options)
                 .always(function () {
                     // Enable form elements, only the ones that were disabled before
                     jqForm.find('.panda-form-disabled')

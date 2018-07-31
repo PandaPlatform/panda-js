@@ -1,10 +1,5 @@
-# OS Helper files
-.php_cs.cache
-.DS_Store
-Thumbs.db
-
 # npm folders
 node_modules
 
-# distribution folder
+# Distribution folder
 dist
