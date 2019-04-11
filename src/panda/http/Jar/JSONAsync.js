@@ -33,9 +33,19 @@
          * @returns {*}
          */
         parseResponseEvents: function (sender, response) {
+            /**
+             * Get response contents
+             *
+             * This is a solution to support both jQuery <=1.7 and >1.7
+             *
+             * The problem is in the promises where the promises do not return
+             * the proper responses, so we have to handle both scenarios here.
+             */
+            var responseContents = response.content ? response.content : response;
+
             // Load body payload
-            for (var key in response) {
-                var responseContent = response[key];
+            for (var key in responseContents) {
+                var responseContent = responseContents[key];
                 var payload = Panda.Http.Jar.JSONAsync.getResponsePayload(responseContent);
                 var responseType = responseContent.type;
 
@@ -53,7 +63,7 @@
                 }
             }
 
-            return response;
+            return responseContents;
         },
 
         /**

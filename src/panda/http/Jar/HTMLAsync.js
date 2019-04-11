@@ -49,10 +49,20 @@
                 throw new Error('The sender of the report does no longer exist in the document.');
             }
 
+            /**
+             * Get response contents
+             *
+             * This is a solution to support both jQuery <=1.7 and >1.7
+             *
+             * The problem is in the promises where the promises do not return
+             * the proper responses, so we have to handle both scenarios here.
+             */
+            var responseContents = response.content ? response.content : response;
+
             // Load body payload
             var contentModified = false;
-            for (var key in response) {
-                var responseContent = response[key];
+            for (var key in responseContents) {
+                var responseContent = responseContents[key];
                 var reportType = responseContent.type;
 
                 // Take action according to result type
@@ -68,7 +78,7 @@
                 $(document).trigger("panda.content.modified");
             }
 
-            return response;
+            return responseContents;
         },
 
         /**
