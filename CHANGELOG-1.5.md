@@ -7,6 +7,8 @@ in all versions (major and minor)
 To get the diff for a specific change, go to https://github.com/PandaPlatform/panda-js/commit/XXX where
 XXX is the change hash
 
+* 1.5.3 (2019-04-11)
+  * [Fix] Disable global off listener for state
 * 1.5.2 (2018-07-31)
   * [jQuery] Inject jQuery using proper variable in closures
 * 1.5.1 (2018-03-16)

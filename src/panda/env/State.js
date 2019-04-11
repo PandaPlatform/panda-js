@@ -11,9 +11,9 @@
         init: function () {
             // Get current state
             this.currentState = window.location.pathname;
-
+        },
+        addListeners: function () {
             // Add listeners
-            $(window).off('popstate');
             $(window).on('popstate', function (ev) {
                 // If it's a reload event and not a push state, ignore this trigger
                 if (!this.statePushed) {
